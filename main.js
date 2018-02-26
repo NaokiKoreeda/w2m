@@ -15,7 +15,8 @@ function createWindow() {
         slashes: true
     }));
 
-    win.webContents.openDevTools();
+    // for Debug
+    //win.webContents.openDevTools();
 
     win.on('closed', () => {
         win = null;
