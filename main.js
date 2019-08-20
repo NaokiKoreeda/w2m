@@ -1,6 +1,6 @@
 'use strict';
 
-const {app, BrowserWindow, Menu} = require('electron');
+const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -11,6 +11,9 @@ function createWindow() {
         width: 800,
         height: 200,
         resizable: false,
+        webPreferences: {
+            nodeIntegration: true
+        },
     });
 
     win.loadURL(url.format({
@@ -58,5 +61,12 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (win === null) {
         createWindow();
+    }
+});
+
+ipcMain.on('async-message', function (event, arg) {
+    if (arg === 'homeDir') {
+        const homeDir = app.getPath('home');
+        event.sender.send('replyHomeDir', homeDir);
     }
 });

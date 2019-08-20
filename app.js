@@ -8,9 +8,9 @@ btnW2m.addEventListener('click', (evt) => {
         txtWPath = txtWPath.replace(new RegExp(/\\/, 'g'), '/');
         txtWPath = txtWPath.replace(new RegExp(/:/), '');
 
-        const elMntPath = document.getElementById('txtMntPath').value + '/';
+        const txtMntPath = document.getElementById('txtMntPath').value + '/';
 
-        elMPath.value = elMntPath + txtWPath;
+        elMPath.value = txtMntPath + txtWPath;
     }
 });
 
@@ -21,9 +21,9 @@ btnM2w.addEventListener('click', (evt) => {
     let txtMPath = document.getElementById('txtMPath').value;
 
     if (txtMPath) {
-        const elMntPath = document.getElementById('txtMntPath').value + '/';
+        const txtMntPath = document.getElementById('txtMntPath').value + '/';
 
-        txtMPath = txtMPath.replace(new RegExp(elMntPath), '');
+        txtMPath = txtMPath.replace(new RegExp(txtMntPath), '');
         txtMPath = txtMPath.replace(new RegExp('/', 'g'), '\\');
 
         const driveName = txtMPath.substr(0, 1);
@@ -31,4 +31,14 @@ btnM2w.addEventListener('click', (evt) => {
 
         elWPath.value = txtMPath;
     }
+});
+
+const {ipcRenderer} = require('electron');
+window.addEventListener('load', function () {
+    ipcRenderer.send('async-message', 'homeDir');
+});
+
+ipcRenderer.on('replyHomeDir', function (event, arg) {
+    const txtMntPath = arg + '/mnt';
+    document.getElementById('txtMntPath').value = txtMntPath;
 });
