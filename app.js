@@ -8,7 +8,9 @@ btnW2m.addEventListener('click', (evt) => {
         txtWPath = txtWPath.replace(new RegExp(/\\/, 'g'), '/');
         txtWPath = txtWPath.replace(new RegExp(/:/), '');
 
-        elMPath.value = '/Volumes/' + txtWPath;
+        const elMntPath = document.getElementById('txtMntPath').value + '/';
+
+        elMPath.value = elMntPath + txtWPath;
     }
 });
 
@@ -19,7 +21,9 @@ btnM2w.addEventListener('click', (evt) => {
     let txtMPath = document.getElementById('txtMPath').value;
 
     if (txtMPath) {
-        txtMPath = txtMPath.replace(new RegExp('/Volumes/'), '');
+        const elMntPath = document.getElementById('txtMntPath').value + '/';
+
+        txtMPath = txtMPath.replace(new RegExp(elMntPath), '');
         txtMPath = txtMPath.replace(new RegExp('/', 'g'), '\\');
 
         const driveName = txtMPath.substr(0, 1);

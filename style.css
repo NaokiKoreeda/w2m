@@ -1,11 +1,9 @@
-div {
-    margin: 10px;
+h1 {
+    display: inline;
 }
 
-input[type="text"] {
-    width: 500px;
-    height: 30px;
-    font-size: large;
+div {
+    margin: 10px;
 }
 
 button {
@@ -14,4 +12,14 @@ button {
     font-size: large;
     border-radius: 5px;
     margin-left: 10px;
+}
+
+#txtWPath, #txtMPath {
+    width: 500px;
+    height: 30px;
+    font-size: large;
+}
+
+#txtMntPath {
+    width: 200px;
 }
